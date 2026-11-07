@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="IND-01: caso de estudio de interfaz UART TTL y RS-485 semidúplex con KiCad 10 y STM32G030K8. Tarea académica aprobada, diseño no fabricado.">
+<title>IND-01 · UART TTL / RS-485 | 3DPS</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,Arial,sans-serif;background:#0e1726;color:#eaf2ff}*{box-sizing:border-box}
+body{margin:0}a{color:#79ccff}header,main,footer{max-width:1040px;margin:auto;padding:26px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}nav a{text-decoration:none}
+.brand{font-size:1.2rem;font-weight:800;color:#fff}h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;margin:12px 0}h2{font-size:1.65rem;margin-top:42px}
+p,li{color:#bfcddd;line-height:1.7}.eyebrow{letter-spacing:.14em;text-transform:uppercase;color:#79ccff;font-size:.78rem;font-weight:750}
+.hero{padding:55px 0 24px}.lead{font-size:1.12rem;max-width:760px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#18243a;border:1px solid #33455e;border-radius:14px;padding:22px}.card h3{margin-top:0;color:#f4f8ff}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.meta span{border:1px solid #4c6583;background:#18243a;border-radius:20px;padding:8px 12px;font-size:.86rem}
+.button{display:inline-block;background:#7edab8;color:#132325;text-decoration:none;font-weight:800;padding:13px 22px;border-radius:9px;margin:10px 0}
+table{width:100%;border-collapse:collapse;background:#18243a}th,td{text-align:left;padding:13px;border-bottom:1px solid #33455e}th{color:#f4f8ff}td{color:#bfcddd}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px;margin:20px 0;padding:19px;border:1px solid #33455e;border-radius:14px}
+.step{background:#18243a;border:1px solid #4c6583;padding:16px;border-radius:10px;text-align:center;font-weight:750}.step small{display:block;color:#bfcddd;font-weight:400;margin-top:6px}.arr{color:#79ccff;font-size:1.4rem}
+.note{border-left:3px solid #79ccff;padding:10px 16px;background:#17243a;color:#d1deee}.muted{color:#a8b7ca}
+footer{border-top:1px solid #344258;margin-top:50px}a:focus-visible{outline:3px solid #7edab8;outline-offset:4px}
+@media(max-width:700px){header,main,footer{padding:18px}.hero{padding:32px 0 18px}.flow{grid-template-columns:1fr}.arr{transform:rotate(90deg);text-align:center}.cards{grid-template-columns:1fr}th,td{padding:9px;font-size:.89rem}}
+</style></head>
+<body>
+<header><nav><a class="brand" href="../../">3DPS</a><a href="../../#portfolio">Volver a proyectos</a></nav></header>
+<main>
+<section class="hero"><div class="eyebrow">Caso de estudio · IND-01 / CTRL-01</div>
+<h1>Interfaz UART TTL / RS-485 semidúplex</h1>
+<p class="lead">Integración de comunicaciones diferenciales en un controlador de baja tensión con STM32G030K8 y transceptor THVD1410DR, conservando UART local para diagnóstico.</p>
+<div class="meta"><span>KiCad 10</span><span>STM32G030K8</span><span>THVD1410DR</span><span>T21 aprobada académicamente</span></div>
+<p class="note">Diseño documentado y revisado mediante capturas ERC/DRC. No se ha fabricado ni ensayado físicamente; tampoco está certificado ni listo para comercialización.</p>
+<a class="button" href="https://github.com/3DPS-Engineering/3DPS/blob/main/proyectos/IND-01/README.md">Consultar README técnico</a></section>
+<section><h2>Necesidad</h2><p>Caso propio basado en un encargo técnico realista: integrar RS-485 semidúplex en CTRL-01 sin perder la conexión UART TTL de 3,3 V para mantenimiento. El reto incluye selección de interfaz, dirección del transceptor y terminación según la posición del nodo en el bus.</p>
+<h2>Arquitectura propuesta</h2>
+<div class="flow" role="img" aria-label="Esquema conceptual STM32G030K8 conectado a jumpers que permiten elegir UART TTL o transceptor RS-485">
+<div class="step">STM32G030K8<small>USART2 PA2 / PA3<br>DIR PA4</small></div><span class="arr">↔</span>
+<div class="step">JP21 · JP22<small>Selección TTL / RS-485</small></div><span class="arr">↔</span>
+<div class="step">Interfaz externa<small>J5 UART local<br>U21 THVD1410 → J21</small></div></div>
+<p class="muted">Diagrama funcional ilustrativo; los esquemas y rutas de PCB se documentan en el expediente de T21.</p>
+<div class="cards">
+<article class="card"><h3>Selección de interfaz</h3><p>JP21 y JP22 conmutan rutas de transmisión y recepción entre la UART local y el transceptor diferencial.</p></article>
+<article class="card"><h3>Terminación configurable</h3><p>R22 de 120 Ω, tamaño 1206, con JP23 para habilitarla únicamente en los extremos físicos del bus.</p></article>
+<article class="card"><h3>Integración del MCU</h3><p>USART2 en PA2/PA3 y RS485_DIR en PA4, tras reorganizar SPI, PWM y control del relé.</p></article>
+</div>
+</section>
+<section><h2>Resultados documentados</h2>
+<table><thead><tr><th>Comprobación</th><th>Resultado de la entrega</th></tr></thead><tbody>
+<tr><td>Cálculos T21</td><td>Revisados y aprobados académicamente</td></tr>
+<tr><td>ERC (KiCad 10)</td><td>0 infracciones en captura</td></tr>
+<tr><td>DRC (KiCad 10)</td><td>0 infracciones, 0 desconectados, 0 errores de paridad en captura</td></tr>
+<tr><td>Huella U21</td><td>D0008A_N, SOIC-8 revisada</td></tr>
+<tr><td>R22</td><td>120 Ω / R_1206_3216Metric confirmado en CSV actualizado</td></tr>
+</tbody></table>
+<p class="muted">Verificaciones basadas en archivos y capturas entregadas, sin auditoría independiente de la totalidad de archivos nativos ni pruebas de laboratorio.</p>
+<h2>Qué demuestra y qué falta</h2>
+<p>El trabajo evidencia integración de buses, reasignación funcional de un microcontrolador, criterios de terminación y selección de componentes, junto con documentación de verificaciones estáticas.</p>
+<p>Antes de fabricar el controlador completo aún debe verificarse su BOM definitiva, protecciones y alimentación, fabricar prototipos y planificar ensayos funcionales y eléctricos.</p>
+<a class="button" href="https://github.com/3DPS-Engineering/3DPS/blob/main/proyectos/IND-01/README.md">Ver documentación detallada</a></section>
+</main>
+<footer><small>© 2026 3DPS · Caso de estudio académico. No corresponde a un producto certificado.</small></footer>
+</body></html>
