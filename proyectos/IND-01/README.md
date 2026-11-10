@@ -71,3 +71,7 @@ Integración de un bus de comunicaciones en un diseño existente, multiplexació
 - [Documentación KiCad 10](https://docs.kicad.org/10.0/)
 
 [Volver a la web 3DPS](https://3dps-engineering.github.io/3DPS/) 
+
+## Continuidad hacia CTRL-01 (09/11/2026)
+
+IND-01 conserva el estado **T21 aprobada académicamente**. El siguiente trabajo del controlador se desarrolla en [CTRL-01 / T22: alimentación y protecciones](../CTRL-01/README.md), **todavía pendiente de aprobación**. La T22 no cambia retrospectivamente las evidencias ni el estado del módulo RS-485.
