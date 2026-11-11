@@ -35,6 +35,21 @@ h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;margin:12px 0}h2{margin-t
 </tbody></table>
 <p>Ese día se informó de una incidencia en la descarga del paquete de la tarea; no supone por sí misma una modificación de PCB ni un resultado de prueba.</p>
 <a class="button" href="https://github.com/3DPS-Engineering/3DPS/blob/main/proyectos/CTRL-01/AVANCES_2026-11-09.md">Ver registro del 9/11</a></section>
+<section id="corriente-regimen">
+<h2>T22 · Corriente en régimen y coordinación de F1</h2>
+<p>La revisión del controlador distingue la <strong>corriente de funcionamiento estabilizado</strong> de la corriente máxima prevista, los picos de arranque y los defectos de sobrecorriente. Las cifras siguientes proceden de hipótesis de la T19 aprobada, no de nuevas mediciones del 9/11.</p>
+<table><thead><tr><th>Condición</th><th>Corriente</th><th>Interpretación</th></tr></thead><tbody>
+<tr><td>Régimen nominal de referencia</td><td><strong>0,45 A</strong></td><td>Estimación académica; desglosar por cargas en T22</td></tr>
+<tr><td>Máxima de diseño prevista</td><td><strong>0,95 A</strong></td><td>No equivale a corriente de bloqueo medida</td></tr>
+<tr><td>Límite de la fuente</td><td><strong>2,00 A</strong></td><td>Protección declarada de la fuente, no consumo de la placa</td></tr>
+</tbody></table>
+<h2>F1 · Discrepancia documental pendiente</h2>
+<div class="cards"><article class="card"><h3>2016L150DR — informe T19</h3><p>Ihold <strong>1,50 A</strong>, Itrip <strong>3,00 A</strong>. La fuente limitada a 2 A no garantiza el disparo del PTC.</p></article>
+<article class="card"><h3>2016L050MR — huella CSV T21</h3><p>Ihold <strong>0,55 A</strong>, Itrip <strong>1,10 A</strong>. La hipótesis de 0,95 A supera Ihold, con riesgo de calentamiento o disparo según tiempo y temperatura.</p></article></div>
+<p>La huella no confirma por sí sola el componente de compra. Se necesita revisar la referencia real de F1 y su curva térmica/tiempo-corriente. <strong>La T22 sigue sin aprobarse.</strong></p>
+<p>Valores de autocontrol del formulario: <strong>0,18 V</strong> de caída, <strong>0,27 W</strong> de disipación, energía ideal C11 <strong>15,84 mJ</strong>, sostén ideal <strong>2,20 ms</strong> y rizado ESR <strong>60,00 mV</strong>. No son resultados medidos.</p>
+<a class="button" href="https://github.com/3DPS-Engineering/3DPS/blob/main/proyectos/CTRL-01/T22_CORRIENTE_REGIMEN.md">Ver análisis, fórmulas y criterios de selección</a>
+</section>
 <section><h2>Qué acredita este caso</h2>
 <p>Una metodología de diseño electrónico por módulos con documentación de decisiones técnicas y evaluación de ejercicios. Los resultados de T21 se documentan en <a href="../IND-01/">IND-01</a>. La T22 sigue abierta; no se afirma fabricación, ensayos de laboratorio, homologación, certificación ni aptitud industrial.</p>
 </section></main><footer><small>© 2026 3DPS · Caso de estudio académico, no producto certificado ni puesto a la venta.</small></footer></body></html>
