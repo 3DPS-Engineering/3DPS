@@ -25,6 +25,24 @@ Desarrollar por etapas el esquema y el layout de un controlador de **baja tensi�
 
 La aprobación de un bloque implica **evaluación académica de los cálculos y evidencias aportadas**, no que el controlador integrado haya sido verificado en laboratorio.
 
+## Corriente en régimen permanente y selección de F1 (ampliación documental del 11/11/2026)
+
+Este apartado desarrolla **el análisis que faltaba en la web de T22**, con los valores localizados en el informe T19, el formulario T22 y el CSV más reciente de T21. No se presentan como mediciones nuevas del 9 de noviembre.
+
+| Magnitud de diseño | Valor | Observación |
+| --- | ---: | --- |
+| Corriente nominal / régimen de referencia | **0,45 A** | Hipótesis académica de T19, no consumo medido |
+| Corriente máxima normal prevista | **0,95 A** | Hipótesis de T19, **no corriente de motor bloqueado** |
+| Límite de corriente de la fuente de 12 V | **2,00 A** | Condición declarada, no corriente de consumo habitual |
+| PTC según T19, 2016L150DR | **Ihold 1,50 A / Itrip 3,00 A** | A 2 A no se garantiza disparo |
+| PTC asociado a la huella del último CSV, 2016L050MR | **Ihold 0,55 A / Itrip 1,10 A** | 0,95 A supera Ihold; confirmar el MPN y el esquema |
+
+**La discrepancia de F1 sigue abierta.** El código de huella del CSV no prueba que se haya elegido o montado ese MPN. En T22 se requiere calcular la corriente real en régimen por cargas y PWM, separar los picos de arranque y comparar tiempos de disparo y desclasificación por temperatura. No se aceptará un componente definitivo sin datasheet y verificación de esquema/PCB/BOM.
+
+También deben documentarse los autocontroles del formulario: **0,18 V** de caída a 1,50 A y 0,12 Ω, **0,27 W** de disipación, energía ideal de C11 **15,84 mJ**, sostén ideal **2,20 ms** y rizado por ESR **60 mV**. Son resultados propuestos en el ejercicio, **no una respuesta final aprobada**.
+
+**[Ver la auditoría detallada de corriente en régimen y F1](T22_CORRIENTE_REGIMEN.md)**, que contiene hipótesis, fórmulas, comparativa de PTC y lista de verificaciones pendientes.
+
 ## Hito del 9 de noviembre de 2026 — T22
 
 ### Objetivo y alcance
